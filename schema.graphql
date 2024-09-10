@@ -1,0 +1,20 @@
+type LogRebase @entity(immutable: true) {
+  id: Bytes!
+  epoch: BigInt! # uint256
+  totalSupply: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PriceSnapshot @entity(immutable: true) {
+  id: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+
+  version: BigInt!
+  token: Bytes!
+
+  price: BigDecimal!
+  indexAdjustedPrice: BigDecimal!
+}

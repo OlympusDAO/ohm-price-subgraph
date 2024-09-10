@@ -16,23 +16,16 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - LogMonetaryPolicyUpdated
         - LogRebase
-        - OwnershipTransferred
-        - Transfer
+        - PriceSnapshot
       abis:
         - name: sOHM_v1
           file: ./abis/sOHM_v1.json
+        - name: UniswapV2Pair
+          file: ./abis/UniswapV2Pair.json
+        - name: ChainlinkPriceFeed
+          file: ./abis/ChainlinkPriceFeed.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: LogMonetaryPolicyUpdated(address)
-          handler: handleLogMonetaryPolicyUpdated
         - event: LogRebase(indexed uint256,uint256)
           handler: handleLogRebase
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      file: ./src/s-ohm-v-1.ts
+      file: ./src/sOHM_v1.ts
