@@ -102,7 +102,10 @@ function getPrice(block: ethereum.Block): BigDecimal {
   // TODO: add support for Balancer, Uniswap V3 pools
 }
 
-export function savePriceSnapshot(block: ethereum.Block): void {
+export function savePriceSnapshot(
+  block: ethereum.Block,
+  index: BigDecimal,
+): void {
   const entity = new PriceSnapshot(Bytes.fromI32(block.number.toI32()));
 
   entity.blockNumber = block.number;
@@ -112,8 +115,7 @@ export function savePriceSnapshot(block: ethereum.Block): void {
   entity.token = getToken(block);
 
   entity.price = getPrice(block);
-  // TODO add index adjustment
-  entity.indexAdjustedPrice = entity.price;
+  entity.indexAdjustedPrice = entity.price.times(index);
 
   entity.save();
 }
