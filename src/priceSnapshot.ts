@@ -103,7 +103,7 @@ function getPrice(block: ethereum.Block): BigDecimal {
 }
 
 export function savePriceSnapshot(block: ethereum.Block): void {
-  const entity = new PriceSnapshot(block.number.toI32());
+  const entity = new PriceSnapshot(Bytes.fromI32(block.number.toI32()));
 
   entity.blockNumber = block.number;
   entity.blockTimestamp = block.timestamp;
