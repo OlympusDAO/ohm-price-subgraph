@@ -18,6 +18,7 @@ import {
   V1_UNISWAP_V2_PAIR,
   V2_UNISWAP_V2_PAIR,
 } from "./constants";
+import { toDecimal } from "./dateHelper";
 
 function getVersion(block: ethereum.Block): BigInt {
   if (block.number.gt(V1_UNISWAP_V2_PAIR_START_BLOCK)) {
@@ -57,12 +58,14 @@ function getUniswapV2Price(pair: Address, ohm: Address): BigDecimal {
 
   const otherToken = token0.equals(ohm) ? token1 : token0;
 
-  const ohmReserves = (token0.equals(ohm) ? reserves.value0 : reserves.value1)
-    .toBigDecimal()
-    .truncate(9);
-  const otherReserves = (token0.equals(ohm) ? reserves.value1 : reserves.value0)
-    .toBigDecimal()
-    .truncate(18);
+  const ohmReserves = toDecimal(
+    token0.equals(ohm) ? reserves.value0 : reserves.value1,
+    9,
+  );
+  const otherReserves = toDecimal(
+    token0.equals(ohm) ? reserves.value1 : reserves.value0,
+    18,
+  );
 
   // DAI is easy
   if (otherToken.equals(Address.fromString(DAI))) {
@@ -110,6 +113,7 @@ export function savePriceSnapshot(
 
   entity.blockNumber = block.number;
   entity.blockTimestamp = block.timestamp;
+  entity.date = new Date(block.timestamp.toI32() * 1000).toISOString();
 
   entity.version = getVersion(block);
   entity.token = getToken(block);

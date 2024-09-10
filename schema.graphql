@@ -2,6 +2,7 @@ type PriceSnapshot @entity(immutable: true) {
   id: Bytes!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
+  date: String!
 
   version: BigInt!
   token: Bytes!

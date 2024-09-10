@@ -5,6 +5,7 @@ import {
 } from "../generated/sOHM_v1/sOHM_v1";
 import { savePriceSnapshot } from "./priceSnapshot";
 import { SOHM_V1 } from "./constants";
+import { toDecimal } from "./dateHelper";
 
 const UINT256_MAX = BigInt.fromString(
   "115792089237316195423570985008687907853269984665640564039457584007913129639935",
@@ -24,7 +25,7 @@ function getIndex(): BigDecimal {
   log.info("gons per fragment: ", [totalGons.div(totalSupply).toString()]);
   // TODO finalise this
 
-  return BigDecimal.fromString("1");
+  return toDecimal(totalSupply, 9).div(toDecimal(fragmentSupply, 9));
 }
 
 export function handleLogRebase(event: LogRebaseEvent): void {
