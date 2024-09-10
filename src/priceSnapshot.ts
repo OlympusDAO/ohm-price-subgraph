@@ -8,18 +8,16 @@ import {
 import { PriceSnapshot } from "../generated/schema";
 import { UniswapV2Pair } from "../generated/sOHM_v1/UniswapV2Pair";
 import { ChainlinkPriceFeed } from "../generated/sOHM_v1/ChainlinkPriceFeed";
-
-const OHM_V1 = "0x383518188C0C6d7730D91b2c03a03C837814a899";
-const OHM_V2 = "0x64aa3364F17a4D01c6f1751Fd97C2BD3D7e7f1D5";
-
-const DAI = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
-const WETH = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
-
-const V1_UNISWAP_V2_PAIR_START_BLOCK = BigInt.fromI32(12092097);
-const V1_UNISWAP_V2_PAIR = "0x34d7d7Aaf50AD4944B70B320aCB24C95fa2def7c";
-
-const V2_UNISWAP_V2_PAIR_START_BLOCK = BigInt.fromI32(13826593);
-const V2_UNISWAP_V2_PAIR = "0x055475920a8c93CfFb64d039A8205F7AcC7722d3";
+import {
+  V1_UNISWAP_V2_PAIR_START_BLOCK,
+  OHM_V1,
+  OHM_V2,
+  DAI,
+  WETH,
+  V2_UNISWAP_V2_PAIR_START_BLOCK,
+  V1_UNISWAP_V2_PAIR,
+  V2_UNISWAP_V2_PAIR,
+} from "./constants";
 
 function getVersion(block: ethereum.Block): BigInt {
   if (block.number.gt(V1_UNISWAP_V2_PAIR_START_BLOCK)) {
