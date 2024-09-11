@@ -5,6 +5,7 @@ type PriceSnapshot @entity(immutable: true) {
   date: String!
 
   version: BigInt!
+  index: BigDecimal!
   token: Bytes!
 
   price: BigDecimal!

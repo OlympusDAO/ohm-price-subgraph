@@ -113,9 +113,10 @@ export function savePriceSnapshot(
 
   entity.blockNumber = block.number;
   entity.blockTimestamp = block.timestamp;
-  entity.date = new Date(block.timestamp.toI32() * 1000).toISOString();
+  entity.date = new Date(block.timestamp.toI64() * 1000).toISOString();
 
   entity.version = getVersion(block);
+  entity.index = index;
   entity.token = getToken(block);
 
   entity.price = getPrice(block);

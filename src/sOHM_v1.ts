@@ -24,8 +24,9 @@ function getIndex(): BigDecimal {
   log.info("total supply: ", [totalSupply.toString()]);
   log.info("gons per fragment: ", [totalGons.div(totalSupply).toString()]);
   // TODO finalise this
+  const index = toDecimal(totalSupply, 9).div(toDecimal(totalGons, 9));
 
-  return toDecimal(totalSupply, 9).div(toDecimal(fragmentSupply, 9));
+  return index;
 }
 
 export function handleLogRebase(event: LogRebaseEvent): void {
