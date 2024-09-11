@@ -12,7 +12,7 @@ function getIndex(): BigDecimal {
 
   const totalSupply = sOhmContract.totalSupply();
   // total supply / 5e14
-  const index = toDecimal(totalSupply, 9).div(
+  const index = toDecimal(totalSupply, 0).div(
     toDecimal(BigInt.fromU64(500000000000000), 0),
   );
 
