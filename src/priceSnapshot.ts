@@ -9,29 +9,29 @@ import { PriceSnapshot } from "../generated/schema";
 import { UniswapV2Pair } from "../generated/sOHM_v1/UniswapV2Pair";
 import { ChainlinkPriceFeed } from "../generated/sOHM_v1/ChainlinkPriceFeed";
 import {
-  V1_UNISWAP_V2_PAIR_START_BLOCK,
+  V0_UNISWAP_V2_PAIR_START_BLOCK,
   OHM_V1,
   OHM_V2,
   DAI,
   WETH,
-  V2_UNISWAP_V2_PAIR_START_BLOCK,
+  V1_UNISWAP_V2_PAIR_START_BLOCK,
+  V0_UNISWAP_V2_PAIR,
   V1_UNISWAP_V2_PAIR,
-  V2_UNISWAP_V2_PAIR,
 } from "./constants";
 import { toDecimal } from "./dateHelper";
 
 function getVersion(block: ethereum.Block): BigInt {
-  if (block.number.gt(V1_UNISWAP_V2_PAIR_START_BLOCK)) {
-    return BigInt.fromI32(1);
+  if (block.number.lt(V1_UNISWAP_V2_PAIR_START_BLOCK)) {
+    return BigInt.fromI32(0);
   }
 
-  return BigInt.fromI32(2);
+  return BigInt.fromI32(1);
 }
 
 function getToken(block: ethereum.Block): Bytes {
   const version = getVersion(block);
 
-  if (version.equals(BigInt.fromI32(1))) {
+  if (version.equals(BigInt.fromI32(0))) {
     return Bytes.fromHexString(OHM_V1);
   }
 
@@ -44,7 +44,7 @@ function getEthChainlinkPrice(): BigDecimal {
   );
   const price = ethPrice.latestAnswer();
 
-  return price.toBigDecimal().truncate(8);
+  return toDecimal(price, 8);
 }
 
 function getUniswapV2Price(pair: Address, ohm: Address): BigDecimal {
@@ -89,28 +89,28 @@ class PriceResult {
 
 function getPrice(block: ethereum.Block): PriceResult {
   // If before start block, return 0
-  if (block.number.lt(V1_UNISWAP_V2_PAIR_START_BLOCK)) {
+  if (block.number.lt(V0_UNISWAP_V2_PAIR_START_BLOCK)) {
     return { price: BigDecimal.fromString("0"), source: Bytes.fromUTF8("") };
   }
 
   // If before the V2 pair start block, use the V1 pair
-  if (block.number.lt(V2_UNISWAP_V2_PAIR_START_BLOCK)) {
+  if (block.number.lt(V1_UNISWAP_V2_PAIR_START_BLOCK)) {
     return {
       price: getUniswapV2Price(
-        Address.fromString(V1_UNISWAP_V2_PAIR),
+        Address.fromString(V0_UNISWAP_V2_PAIR),
         Address.fromString(OHM_V1),
       ),
-      source: Bytes.fromHexString(V1_UNISWAP_V2_PAIR),
+      source: Bytes.fromHexString(V0_UNISWAP_V2_PAIR),
     };
   }
 
   // Use the V2 pair
   return {
     price: getUniswapV2Price(
-      Address.fromString(V2_UNISWAP_V2_PAIR),
+      Address.fromString(V1_UNISWAP_V2_PAIR),
       Address.fromString(OHM_V2),
     ),
-    source: Bytes.fromHexString(V2_UNISWAP_V2_PAIR),
+    source: Bytes.fromHexString(V1_UNISWAP_V2_PAIR),
   };
 
   // TODO: add support for Balancer, Uniswap V3 pools

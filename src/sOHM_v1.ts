@@ -4,7 +4,7 @@ import {
   sOHM_v1,
 } from "../generated/sOHM_v1/sOHM_v1";
 import { savePriceSnapshot } from "./priceSnapshot";
-import { SOHM_V1 } from "./constants";
+import { SOHM_V0 } from "./constants";
 import { toDecimal } from "./dateHelper";
 
 const UINT256_MAX = BigInt.fromString(
@@ -12,7 +12,7 @@ const UINT256_MAX = BigInt.fromString(
 );
 
 function getIndex(): BigDecimal {
-  const sOhmContract = sOHM_v1.bind(Address.fromString(SOHM_V1));
+  const sOhmContract = sOHM_v1.bind(Address.fromString(SOHM_V0));
 
   const fragmentSupply = BigInt.fromI32(500000).times(
     BigInt.fromI32(10).pow(9),

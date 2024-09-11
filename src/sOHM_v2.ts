@@ -4,11 +4,11 @@ import {
   sOHM_v2,
 } from "../generated/sOHM_v2/sOHM_v2";
 import { savePriceSnapshot } from "./priceSnapshot";
-import { SOHM_V2 } from "./constants";
+import { SOHM_V1 } from "./constants";
 import { toDecimal } from "./dateHelper";
 
 function getIndex(): BigDecimal {
-  const sOhmContract = sOHM_v2.bind(Address.fromString(SOHM_V2));
+  const sOhmContract = sOHM_v2.bind(Address.fromString(SOHM_V1));
 
   return toDecimal(sOhmContract.index(), 9);
 }
