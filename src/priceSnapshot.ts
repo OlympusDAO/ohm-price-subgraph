@@ -32,10 +32,10 @@ function getToken(block: ethereum.Block): Bytes {
   const version = getVersion(block);
 
   if (version.equals(BigInt.fromI32(1))) {
-    return Bytes.fromUTF8(OHM_V1);
+    return Bytes.fromHexString(OHM_V1);
   }
 
-  return Bytes.fromUTF8(OHM_V2);
+  return Bytes.fromHexString(OHM_V2);
 }
 
 function getEthChainlinkPrice(): BigDecimal {
@@ -82,25 +82,36 @@ function getUniswapV2Price(pair: Address, ohm: Address): BigDecimal {
   throw new Error("Unknown token: " + otherToken.toHexString());
 }
 
-function getPrice(block: ethereum.Block): BigDecimal {
+class PriceResult {
+  price: BigDecimal;
+  source: Bytes;
+}
+
+function getPrice(block: ethereum.Block): PriceResult {
   // If before start block, return 0
   if (block.number.lt(V1_UNISWAP_V2_PAIR_START_BLOCK)) {
-    return BigDecimal.fromString("0");
+    return { price: BigDecimal.fromString("0"), source: Bytes.fromUTF8("") };
   }
 
   // If before the V2 pair start block, use the V1 pair
   if (block.number.lt(V2_UNISWAP_V2_PAIR_START_BLOCK)) {
-    return getUniswapV2Price(
-      Address.fromString(V1_UNISWAP_V2_PAIR),
-      Address.fromString(OHM_V1),
-    );
+    return {
+      price: getUniswapV2Price(
+        Address.fromString(V1_UNISWAP_V2_PAIR),
+        Address.fromString(OHM_V1),
+      ),
+      source: Bytes.fromHexString(V1_UNISWAP_V2_PAIR),
+    };
   }
 
   // Use the V2 pair
-  return getUniswapV2Price(
-    Address.fromString(V2_UNISWAP_V2_PAIR),
-    Address.fromString(OHM_V2),
-  );
+  return {
+    price: getUniswapV2Price(
+      Address.fromString(V2_UNISWAP_V2_PAIR),
+      Address.fromString(OHM_V2),
+    ),
+    source: Bytes.fromHexString(V2_UNISWAP_V2_PAIR),
+  };
 
   // TODO: add support for Balancer, Uniswap V3 pools
 }
@@ -119,7 +130,9 @@ export function savePriceSnapshot(
   entity.index = index;
   entity.token = getToken(block);
 
-  entity.price = getPrice(block);
+  const priceResult = getPrice(block);
+  entity.price = priceResult.price;
+  entity.priceSource = priceResult.source;
   entity.indexAdjustedPrice = entity.price.times(index);
 
   entity.save();

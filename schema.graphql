@@ -10,4 +10,5 @@ type PriceSnapshot @entity(immutable: true) {
 
   price: BigDecimal!
   indexAdjustedPrice: BigDecimal!
+  priceSource: Bytes!
 }
