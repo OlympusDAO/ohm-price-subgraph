@@ -11,7 +11,7 @@ dataSources:
       address: "0x31932E6e45012476ba3A3A4953cbA62AeE77Fbbe"
       abi: sOHM_v1
       startBlock: 12084973
-      endBlock: 12092097
+      endBlock: 12622596
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -35,8 +35,8 @@ dataSources:
     source:
       address: "0x04F2694C8fcee23e8Fd0dfEA1d4f5Bb8c352111F"
       abi: sOHM_v2
-      startBlock: 12092097
-      endBlock: 13826593
+      startBlock: 12622596
+      endBlock: 13803969
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -60,7 +60,7 @@ dataSources:
     source:
       address: "0x04906695D6D12CF5459975d7C3C03356E4Ccd460"
       abi: sOHM_v3
-      startBlock: 13826593
+      startBlock: 13803969
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
