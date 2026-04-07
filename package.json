@@ -9,11 +9,13 @@
     "remove-local": "graph remove --node http://localhost:8020/ ohm-price-subgraph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ohm-price-subgraph",
     "test": "graph test",
+    "lint": "prettier --write .",
+    "lint:check": "prettier --check .",
     "format": "prettier --write .",
     "preinstall": "npx only-allow@1.2.2 pnpm"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.97.1",
+    "@graphprotocol/graph-cli": "0.98.1",
     "@graphprotocol/graph-ts": "0.32.0"
   },
   "devDependencies": {
@@ -104,8 +106,8 @@
       "tar@<=7.5.2": ">=7.5.3",
       "tar@<=7.5.3": ">=7.5.4",
       "tar@<=7.5.9": ">=7.5.10",
-      "tmp@<=0.2.3": ">=0.2.4"
-      ,"undici": ">=7.24.0",
+      "tmp@<=0.2.3": ">=0.2.4",
+      "undici": ">=7.24.0",
       "undici@>=7.0.0 <7.18.2": ">=7.18.2",
       "undici@>=7.0.0 <7.24.0": ">=7.24.0",
       "yaml": ">=2.8.3",
