@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository is part of the OlympusDAO organization.
+This repository provides a The Graph subgraph for OHM price feeds and related pricing event history used by onchain dashboards and APIs.
 
 ## Node and Tooling
 
