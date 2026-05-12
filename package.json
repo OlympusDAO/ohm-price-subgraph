@@ -113,8 +113,9 @@
       "yaml": ">=2.8.3",
       "yaml@>=2.0.0 <2.8.3": ">=2.8.3",
       "axios@<1.15.0": ">=1.15.0",
-      "apisauce>axios": ">=1.15.0",
-      "follow-redirects": ">=1.16.0"
+      "apisauce>axios": ">=1.15.2",
+      "follow-redirects": ">=1.16.0",
+      "axios@<1.15.2": ">=1.15.2"
     }
   }
 }
