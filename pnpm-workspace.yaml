@@ -1,0 +1,38 @@
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - "axios@1.16.0"
+preferFrozenLockfile: true
+engineStrict: true
+strictDepBuilds: true
+blockExoticSubdeps: true
+overrides:
+  "axios": "^1.15.2"
+  "base-x": "^3.0.11"
+  "bn.js": "^5.2.3"
+  "brace-expansion": "^2.0.3"
+  "cipher-base": "^1.0.5"
+  "cross-spawn": "^7.0.5"
+  "diff@>=4.0.0 <4.0.4": "^4.0.4"
+  "ejs": "^3.1.10"
+  "elliptic": "^6.6.1"
+  "follow-redirects": "^1.16.0"
+  "form-data": "^2.5.4"
+  "glob": "^11.1.0"
+  "immutable": "^4.3.8"
+  "js-yaml": "^4.1.1"
+  "lodash.trim": "4.18.0"
+  "lodash.trimend": "4.18.0"
+  "minimatch": "^8.0.6"
+  "nanoid": "^3.3.8"
+  "parse-duration": "^2.1.3"
+  "pbkdf2": "^3.1.3"
+  "picomatch": "^2.3.2"
+  "qs": "^6.14.1"
+  "secp256k1": "^4.0.4"
+  "semver": "^7.5.2"
+  "sha.js": "^2.4.12"
+  "tar": "^7.5.11"
+  "tar-fs": "^1.16.6"
+  "tmp@<=0.2.3": "^0.2.4"
+  "undici": "^7.24.0"
+  "yaml": "^2.8.3"
