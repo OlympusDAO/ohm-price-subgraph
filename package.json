@@ -11,8 +11,7 @@
     "test": "graph test",
     "lint": "prettier --write .",
     "lint:check": "prettier --check .",
-    "format": "prettier --write .",
-    "preinstall": "npx only-allow@1.2.2 pnpm"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.98.1",
@@ -25,9 +24,9 @@
   },
   "engines": {
     "node": ">=24",
-    "pnpm": ">=10.33.0",
+    "pnpm": ">=11.13.0 <12",
     "npm": "use-pnpm",
     "yarn": "use-pnpm"
   },
-  "packageManager": "pnpm@10.33.0"
+  "packageManager": "pnpm@11.13.0"
 }

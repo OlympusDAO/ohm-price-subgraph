@@ -1,1 +1,3 @@
 generated/
+.jj/
+pnpm-lock.yaml
