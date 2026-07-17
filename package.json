@@ -9,10 +9,10 @@
     "remove-local": "graph remove --node http://localhost:8020/ ohm-price-subgraph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ohm-price-subgraph",
     "test": "graph test",
+    "preinstall": "node -e \"const ua = process.env.npm_config_user_agent || ''; if (!ua.startsWith('pnpm/')) { console.error('This project requires pnpm.'); process.exit(1); }\"",
     "lint": "prettier --write .",
     "lint:check": "prettier --check .",
-    "format": "prettier --write .",
-    "preinstall": "npx only-allow@1.2.2 pnpm"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.98.1",
@@ -25,9 +25,9 @@
   },
   "engines": {
     "node": ">=24",
-    "pnpm": ">=10.33.0",
+    "pnpm": ">=11.13.0 <12",
     "npm": "use-pnpm",
     "yarn": "use-pnpm"
   },
-  "packageManager": "pnpm@10.33.0"
+  "packageManager": "pnpm@11.13.0"
 }
