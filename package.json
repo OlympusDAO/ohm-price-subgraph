@@ -9,7 +9,6 @@
     "remove-local": "graph remove --node http://localhost:8020/ ohm-price-subgraph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ohm-price-subgraph",
     "test": "graph test",
-    "preinstall": "node -e \"const ua = process.env.npm_config_user_agent || ''; if (!ua.startsWith('pnpm/')) { console.error('This project requires pnpm.'); process.exit(1); }\"",
     "lint": "prettier --write .",
     "lint:check": "prettier --check .",
     "format": "prettier --write ."
